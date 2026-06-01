@@ -161,6 +161,9 @@ venv.bak/
 envs/
 *.conda
 
+# config
+config.py
+
 # Spyder project settings
 .spyderproject
 .spyproject
