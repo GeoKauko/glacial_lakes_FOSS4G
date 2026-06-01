@@ -157,6 +157,10 @@ ENV/
 env.bak/
 venv.bak/
 
+# Conda
+envs/
+*.conda
+
 # Spyder project settings
 .spyderproject
 .spyproject
