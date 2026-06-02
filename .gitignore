@@ -164,6 +164,9 @@ envs/
 # config
 config.py
 
+# avoid unnecessary data
+output/
+
 # Spyder project settings
 .spyderproject
 .spyproject
