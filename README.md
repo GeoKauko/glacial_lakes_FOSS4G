@@ -28,7 +28,7 @@ Extends the lake time series back to 1985 using Landsat imagery, replicating the
 &rarr; Build annual summer composites via Google Earth Engine, automatically selecting the appropriate Landsat mission (5, 7, 8, or 9) per year.\
 &rarr; In place of SAR data, use thermal infrared (TIR), elevation (ArcticDEM V4), and an additional spectral index (NDDI) to improve water classification.\ 
 &rarr; Classify segments using a combination of NDWI, NDVI, NDDI, brightness, and elevation thresholds.\
-&rarrM´; Export annual lake outlines as GeoPackages.
+&rarr; Export annual lake outlines as GeoPackages.
 
 **Requirements:** Google Earth Engine authentication
 
