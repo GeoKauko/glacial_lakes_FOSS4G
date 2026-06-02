@@ -6,29 +6,44 @@ Repository for the abstract "Representing spatiotemporal dynamics of glacial lak
 
 ## Contents
 
-### [`1_OBIA_lakes_S1S2.ipynb`](1_OBIA_lakes_S1S2.ipynb) — Glacial Lake Mapping with Sentinel-1 and Sentinel-2 (2016–2025)
+### Glacial Lake Mapping with Sentinel-1 and Sentinel-2 (2016–2025): [`1_OBIA_lakes_S1S2.ipynb`](1_OBIA_lakes_S1S2.ipynb)
 
-Maps annual glacial lake extents for the Vatnajökull area in southeast Iceland using an Object-Based Image Analysis (OBIA) workflow. For each year (2016–2025), summer median composites are retrieved from the Copernicus Dataspace via OpenEO for both Sentinel-2 (optical) and Sentinel-1 (SAR) data. Spectral indices (NDWI, NDVI, NDSI) and SAR backscatter features are computed and combined into a feature stack, which is segmented using SLIC. Water segments are classified using a configurable fusion of S2 and S1 thresholds. Annual lake outlines are exported as GeoPackages to `OBIA_DIR`. Based on the OBIA workflow by Dabiri et al. (2021).
+Maps annual glacial lake extents for the Vatnajökull area in southeast Iceland using an object-based image analysis (OBIA).\
+&rarr; For each year, retrieve summer median composites from the Copernicus Dataspace via OpenEO for both Sentinel-2 and Sentinel-1 data.\
+&rarr; Compute spectral indices (NDWI, NDVI, NDSI) and SAR backscatter features and combine into a feature stack.\
+&rarr; Segment feature stack using SLIC.\
+&rarr; Classify water segments using S2 and S1 thresholds.\
+&rarr; Export annual lake outlines as GeoPackages.\
+Based on the OBIA workflow by Dabiri et al. (2021).
 
-**Requires:** OpenEO authentication (Copernicus Dataspace account)
+**Requirements:** OpenEO authentication
 
-> **Note:** Annual lake outlines were manually reviewed and poorly segmented polygons removed.
-
----
-
-### [`2_OBIA_lakes_LS.ipynb`](2_OBIA_lakes_LS.ipynb) — Glacial Lake Mapping with Landsat via Google Earth Engine (1985–2015)
-
-Extends the lake time series back to 1985 using Landsat imagery, replicating the OBIA workflow from notebook 1 with adaptations for the lower resolution and different band availability of Landsat. Summer composites are built annually via Google Earth Engine, automatically selecting the appropriate Landsat mission (5, 7, 8, or 9) per year. In place of SAR data, thermal infrared (TIR), elevation (ArcticDEM V4), and an additional spectral index (NDDI) are used to improve water classification. Segments are classified using a combination of NDWI, NDVI, NDDI, brightness, and elevation thresholds. Annual lake outlines are exported as GeoPackages to `OBIA_DIR`. Based on the OBIA workflow by Dabiri et al. (2021).
-
-**Requires:** Google Earth Engine authentication (GEE account)
-
-> **Note:** Annual lake outlines were manually reviewed and poorly segmented polygons removed. Years 2003, 2007, 2008, and 2009 were excluded entirely due to insufficient outline quality.
+> **Note:** Manually review the lake outlines and remove poorly segmented polygons.
 
 ---
 
-### [`3_glacial_lakes_VDC.ipynb`](3_glacial_lakes_VDC.ipynb) — Vector Data Cube Construction and Feature Grouping (1985–2025)
+### Glacial Lake Mapping with Landsat via Google Earth Engine (1985–2015): [`2_OBIA_lakes_LS.ipynb`](2_OBIA_lakes_LS.ipynb)
 
-Combines the annual lake outlines produced by notebooks 1 and 2 into a vector data cube (VDC) and investigates five feature grouping methods for tracking individual lakes consistently over time. Annual GeoPackages are loaded, validated, and assigned lake IDs using: 1) spatial overlap or proximity, 2) centroid, 3) bounding box, 4) automatic representative point, and 5) manual representative point — each built into a separate VDC using `xvec`. The notebook then analyses spatiotemporal dynamics (disappearing, reappearing, merging, splitting) across methods and compares their effect on lake area time series. Based on the VDC framework by Abad et al. (2024).
+Extends the lake time series back to 1985 using Landsat imagery, replicating the OBIA workflow from notebook 1 with adaptations for the lower resolution and different band availability of Landsat.\
+&rarr; Build annual summer composites via Google Earth Engine, automatically selecting the appropriate Landsat mission (5, 7, 8, or 9) per year.\
+&rarr; In place of SAR data, use thermal infrared (TIR), elevation (ArcticDEM V4), and an additional spectral index (NDDI) to improve water classification.\ 
+&rarr; Classify segments using a combination of NDWI, NDVI, NDDI, brightness, and elevation thresholds.\
+&rarrM´; Export annual lake outlines as GeoPackages.
+
+**Requirements:** Google Earth Engine authentication
+
+> **Note:** Manually review the lake outlines and remove poorly segmented polygons. Years 2003, 2007, 2008, and 2009 were excluded entirely due to insufficient outline quality.
+
+---
+
+### Vector Data Cube Construction and Feature Grouping (1985–2025): [`3_glacial_lakes_VDC.ipynb`](3_glacial_lakes_VDC.ipynb)
+
+Combines the annual lake outlines produced by notebooks 1 and 2 into a vector data cube (VDC) and investigates five feature grouping methods for tracking individual lakes over time.\
+&rarr; Load and validate GeoPackages.\
+&rarr; Assign lake IDs using: 1) spatial overlap or proximity, 2) centroid of temporal union, 3) bounding box of temporal union, 4) automatic representative point, and 5) manual representative point.\
+&rarr; Build a VDC for each method using `xvec`.\
+&rarr; Analyse spatiotemporal dynamics (disappearing, reappearing, merging, splitting) across methods and compare their effect on lake area time series.\
+Based on the VDC framework by Abad et al. (2024).
 
 **Requires:** Output from notebooks 1 and 2 in `OBIA_DIR`
 
